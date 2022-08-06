@@ -1,0 +1,44 @@
+Azure DevOps Services - Cloud based
+Azure DevOps Server 2019 - On-premises
+
+---------------------
+Azure DevOps features
+---------------------
+1. Azure Boards     -   Project planning, Kanban and Scrum methods - Similar to JIRA - Complete Agile project management is the feature of Azure Board
+2. Azure Repos      -   Git repositories - Github, Gitlab, BitBucket same features are avaiable here 
+3. Azure Pipelines  -   Provides build and release services to support continuous integaration and continuous delivery
+4. Azure Test Plans -   Manual / exploratory testing and continuous testing
+5. Azure Artifcats  -   For storing build artifacts privately / publicly
+
+** Extensions       -   Will be helpful to integrate with popular services like SNOW, Campfire, Slack - We have a market place and we can add extensions here
+
+https://azure.microsoft.com/en-gb/services/devops/
+
+1. Login to dev.azure.com
+2. Create a DevOps organisation
+3. Create a DevOps project (one organisation can have multiple projects)
+4. Explore project settings
+5. Go to organisations page and explore organisation settings
+
+https://dev.azure.com/{organisation_name}/{project_name}
+Now the format of the link looks like this
+
+Organisation Settings
+---------------------
+** PROJECTS **
+1. Creating new projects and explore advanced options while creating new project
+
+** USERS **
+1. Create new users
+2. Access Level
+    a. Basic                        -   5 Users are free
+    b. Stakeholder                  -   Unlimited users are free (Dashboard | Wiki | Azure Board)
+    c. Visual Studio Subscriber     -   Unlimited users are free
+3. Allocate project to the user
+
+
+Azure Cloud
+https://portal.azure.com
+1. Login to azure
+2. Add a subscription
+3. 
