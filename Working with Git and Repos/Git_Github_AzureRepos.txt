@@ -43,3 +43,45 @@ git merge feature/f1
 git push origin master
 git log
 
+-------------
+Pull Requests
+-------------
+- Delete branches in local other than master branch
+$ git branch -d feature/f1
+$ git branch
+
+- Create a new branch feature/f2 and checkout into newly created branch
+$ git branch feature/f2
+$ git checkout feature/f2
+$ git branch
+
+- Edit the code in this new feature branch
+$ git status
+
+- Add the new code to staging and commit the changes in local
+$ git commit -m "Feature2 - f2 branch created and code modified" -a
+$ git status
+$ git log --oneline
+
+- Push the feature/f2 branch to the remote repository
+$ git push origin feature/f2
+
+- Go to the console of Azure DevOps - Azure Repos and observe if there are two branches Master and feature/f2
+- From console create a pull request to review the edited code
+    * While creating the pull request observe - work items to link and tags option
+    * work items to link are those item on the Azure board - automatically they will be completed
+    * tag opiton will be used in the CI/CD - Azure CI pipelines
+- Add yourself as the reviewer - this will not be apprach in real time
+- After approving the pull reques - complete pull request
+- Observe the modified files
+- Delete feature/f2 branch after completing pull request
+- Now feature/f2 branch will not be available
+
+- To have the same code in out local master branch - pull the code from the repository
+$ git checkout master
+$ git pull master
+
+- Delete the feature/f2 branch from local as well
+$ git branch
+$ git branch -d feature/f2
+$ git branch
