@@ -8,7 +8,7 @@ Git Flow
 Working Directory -> Staging -> Local Repo -> Remote Repo
 
 # Git Basic Commands
-git init
+git init\
 git config user.name sagar
 git config user.email sagar@abc.xyz
 git status
