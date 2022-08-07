@@ -41,4 +41,3 @@ Azure Cloud
 https://portal.azure.com
 1. Login to azure
 2. Add a subscription
-3. 

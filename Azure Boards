@@ -1,0 +1,15 @@
+- Azure board is similar to Jira software - This is a project planning and management tool
+    - Tracking user stories
+    - Backlog items
+    - Task
+    - Features
+    - Bugs / Defects
+
+In the organisation setttings - Board - Process
+1. Basic        -   Epics, Issues, Tasks to track the work
+2. Agile        -   User stories, Epics, Tasks, Bugs, Featues    
+3. Scrum        -   Product backlog items, bugs
+4. CMMI         -   Capability Maturity Model Integration Process - requirements, change requests, risks and reviews
+
+For every Process - we will have built in fields - we can explore this option in Boards - Process - Fields
+
