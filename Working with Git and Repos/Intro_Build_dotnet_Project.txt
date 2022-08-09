@@ -10,6 +10,7 @@ STEPS to Create Solution and Project
 $ dotnet new sln -o HelloWorldApp
 # This will create a solution file it will create a dir HelloWorldApp
 # This HelloWorldApp directory is the working directory
+$ cd HelloWorldApp
 
 $ dotnet new mvc -n HelloWorldApp.Web
 # This will create the directory with HelloWorldApp.Web with class and project related files explore them
@@ -27,7 +28,8 @@ $ dotnet dev-certs https --trust
 $ dotnet restore        # Downloading all NuGet dependencies to local machine
 $ dotnet build          # Builds and generates executable - runs restore and build
 After build we can test the application
-$ dotnet HelloWorldApp.Web/bin/Debug/net6.0/HelloWorldApp.Web.dll
+$ cd HelloWorldApp.Web
+$ dotnet bin/Debug/net6.0/HelloWorldApp.Web.dll
 # Launches dotnet runtime and loads application in it
 
 $ dotnet publish        # This publishes the executable - runs restore, build and publish
