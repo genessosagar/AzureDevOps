@@ -85,3 +85,124 @@ $ git pull master
 $ git branch
 $ git branch -d feature/f2
 $ git branch
+
+---------------
+Branch Policies
+---------------
+Branches - Master Branch - Select the Branching Policies - 
+Requirement: Two people are required to approve the pull request
+Draft Pull Request - Imp look into this
+Draft pull requests have the following differences from published pull requests
+    * Build Validation
+    * Voting is disabled while in draft mode
+    * Required viewers aren't automatically added
+    * Notifications are sent while in draft mode, but only to reviewers that you explicitly add to the draft pull request
+    * Draft pull requests are displayed in the pull requests list with a special badge
+
+** Revert a Pull Request
+Open a completed pull request
+Pull Requests -> completed -> select the desired pull request -> revert
+This will create a new branch by reverting the changes
+We can create a pull request and merge back to the master branch
+
+Setup Auto Completion
+---------------------
+** Create a PR -> Based on approval -> We can setup auto completion -> This will merge and delete the branch automatically
+
+
+-----------------
+Deleting a branch
+-----------------
+$ git branch -d <branch_name>
+If all this branch code is merged with the master branch / origin branch
+
+$ git branch -D <branch_name>
+If the changes of this branch_name are not merged with the master and still we want to delete the brnach then we use -D
+
+----------------------------------
+SQUASH MERGING DURING PULL REQUEST
+----------------------------------
+Condense the Git history -> Multiple commits to a single commit
+$ git branch features/squash
+$ git checkout features/squash
+Edit the code multiple times and create multiple commits using the following command
+$ git commit -m "Multiple commits" -a
+$ git push origin features/squash
+$ git status
+Go to the Azure DevOps console and create a pull request and while completing the pull request squash the multiple commits to a single commit
+$ git log --oneline
+
+----------------------------
+Working with Merge conflicts
+----------------------------
+This we have to work in such a way that two developers are working on the code
+Developer1
+$ git branch
+Delete if there are any other brnaches using the following command
+$ git branch -d <branch_name>
+$ git checkout -b features/merge
+Edit the code and commit the changes and push them to the remote repo
+
+Developer2
+Pull the code into /tmp dir
+$ git checkout features/merge
+
+Now both the developers will work simultaneously from two different directories
+Developer1 - Pushes the code to the remote feature branch
+Developer2 - After Developer1 pushes the code, Developer2 puses the code, we have to take a pull and push the code as the changes are not same in the remote repo
+For push and pull use the following commands
+$ git pull origin <branch_name>
+$ git push origin <branch_name>
+
+Make the changes for the same line and same position by both the developers
+Now if the Developer2 pulls the code, there will be merge conflict as the changes are made to the same line and position in the same file
+Open the visual studio code editor and make the desired changes and push the code back to the remote repo
+
+If faced with an error of
+fatal: Not possible to fast-forward, aborting.
+use
+$ git pull --rebase
+
+
+--------------------
+Branching Strategies
+--------------------
+** Trunk based **
+Master -> Feature Branches -> Pull Requests -> Merge Back to Master
+Master -> Develop -> Features -> Pull Requests -> Merge to Develop -> Develope merges back to Master at the end of every sprint
+
+** GitFlow Branch Workflow **
+Master
+Hotfix
+Release
+Develop
+Feature
+Feature
+
+Develop Code        ->      Dev Environment
+Release Code        ->      QA + UAT Environment
+Master Code         ->      Prod Environment
+
+A Develop branch is created from Master
+A Release branch is created from Develop
+Feature branches are created from Develop
+When a feature is completed it is merged into the Develop branch through Pull Request
+When the Release branch is done it is merged into Develop and Master branch
+If an issue in the Master is detected a hotfix branch is created from Master
+Once the hotfix is complete it is merged to both develop and master
+
+-----------------------
+Mono Repo vs Multi Repo
+-----------------------
+Monolithic Projects -> Single Repo
+Micro Service Project -> Multiple Repo
+
+
+---------
+GIT HOOKS
+---------
+Practical use cases for using GitHooks
+* Verifying work item ID association in your commit message
+* Preventing you and your team from committing faulty code
+* Sending notifications to your teams chat room (slack, teams, HipChat etc)
+Observe the .git/hooks directory -> 
