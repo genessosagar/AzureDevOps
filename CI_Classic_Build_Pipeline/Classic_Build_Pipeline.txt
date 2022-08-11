@@ -1,0 +1,66 @@
+Agent Jobs - Use Agents to run the agent job 
+**/*.csproj
+** is the current directoy and all the sub directories
+
+1. Create an empty pipeline
+Name - HelloWorldApp-CI-Empty-Classic
+Agent Pool - Azure Pipelines
+Agent Specification - ubuntu-20.04
+
+2. Go to AgentJob1 section -> Click on the Add Task(+)
+TAsk - 1
+--------
+- Add Command line script task
+- Change display name if desired
+- Script
+echo "$(Build.DefinitionName)"
+echo "$(Build.BuildId)"
+echo "$(Build.BuildNumber)"
+
+TASK - 2
+--------
+- Add .NET core three tasks
+- One for Restore
+    - Select and change the display name to Restore
+    - Command = restore
+    - Path to Projects = **/*.csproj
+
+TASK - 3
+--------
+- Two for Build
+    - Select and change the display name to Build
+    - Command = build
+    - Path to Projects = **/*.csproj
+    - Arguments = --configuration $(BuildConfiguration)
+    
+    - Go to variables tab / section and create a variable
+    - BuildConfiguration = Release
+
+TASK - 4
+--------
+- Three for Publish
+    - Select and change the display name to Publish
+    - Command = publish
+    - Select Publish Web Projects
+    - Arguments = --configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)
+    
+    - Go to variables tab / section and create a variable
+    - BuildConfiguration = Release
+
+TASK - 5
+--------
+- Add the task File Creator
+- For the first time - install the First Time creator by following the steps of Get
+- Path
+$(build.artifactstagingdirectory)/build-info.txt
+- File Content
+BuildDefinitionName = "$(Build.DefinitionName)"
+BuildId = "$(Build.BuildId)"
+BuildNumber = "$(Build.BuildNumber)"
+
+TASK - 6
+--------
+Add the task - Publish Artifact: drop
+
+-> Save & Queue
+-> Run the Agent Job
