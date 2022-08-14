@@ -43,4 +43,28 @@ Clone settings -> from the same app service
 -> Go to Azure portal after creating service connection
 -> Active Directory - Our directory name
 -> App Registrations - Observe the new service principal created
--> Go to the Subscription -> 
+-> Go to the Resource Manager and we can see the IAM section our identity -> 
+
+------------------
+
+In Azure DevOps we have 
+
+-----------------
+RELEASE PIPELINES
+-----------------
+-> Click Release tab
+-> Select the template - where we want to deploy our application -> Azure App Service Deployment
+-> Stage will be automatically added - and a job is also added to it
+-> In that stage - choose azure subscription -> App type windows -> App Service name (select dev)
+-> Go back to pipeline
+-> We want to deploy artifacts into the app service -> click on Artifacts
+-> Create new stages for QA and Production
+-> For Production - Go to the stage and select the staging slot as well
+-> To move to the production from staging slot -> Add one more task
+-> Add - Azure App Service Manage
+-> Add approvals between Dev to QA and to Prod
+-> For production do pre deployment approval
+-> Create release
+-> Do the continuous deployment as well
+-> If we have a requirement to deploy the app parallely on both Dev and QA then -> 
+
