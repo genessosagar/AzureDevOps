@@ -1,0 +1,46 @@
+
+------------------------------------------------------------------------------
+We can deploy the application in any on of the following Azure compute options
+------------------------------------------------------------------------------
+* Azure App Service - PaaS
+* Virtual Machines and VM Scalesets - IaaS
+* Serverless Computing
+* Containers
+
+Go to the
+portal.azure.com
+
+Go to App Services -> 
+Create 3 app services -> One for Dev, QA and Prod
+Select the subscription
+Create a Resource Group
+Name of the Instance
+Publish is code
+Runtime Stack -> .NET 6 (LTS)
+Operating System -> Windows
+Region -> Central US
+
+App Service Plan -> By default a plan gets created rename it as we want
+usually use the same plan for Dev, QA, UAT and for prod use a different plan
+
+Go to the prod app service -> Go to Deployment slots -> Add a slot with a name of our choice - staging -> 
+Clone settings -> from the same app service
+
+* Now we need to make connection from Azure DevOps to Azure App Service
+* Go to project settings and create service connection
+* Service connections - if we want AWS / GCP we can connect using this 
+* Connect to Azure Resource Manager
+* We get 4 options
+    - Service principal (automatic)
+    - Service principal (manual)
+    - Managed Identity
+    - Publish profile
+* Select automatic and Next
+* Scope level - Subscription
+* Select the desired subscription and resource group
+* Select Grant access permissions to all pipelines
+
+-> Go to Azure portal after creating service connection
+-> Active Directory - Our directory name
+-> App Registrations - Observe the new service principal created
+-> Go to the Subscription -> 
