@@ -1,0 +1,50 @@
+ASP.NET core project we are building
+
+Create a new pipeline
+- Azure Repos Git (YAML)
+- Trigger - None, Master, other branch name
+- pool - Agent pool what image to use - ubuntu etc
+- Variables - 
+- steps
+    - script - Commandline command
+
+We can make use of the show assistance to generate the yaml file
+Repeat this show assistance for all restore, build, publish and publish build artifacts tasks for a dotnet project
+Give Display name for them
+
+Publish Build Artifacts is deprecated instead use Pipeline Aritfacts
+https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/publish-build-artifacts?view=azure-devops
+
+Pipeline Artifacts
+https://docs.microsoft.com/en-us/azure/devops/pipelines/artifacts/pipeline-artifacts?view=azure-devops&tabs=yaml
+
+Note:
+When we create a yaml pipeline that code/yaml pipeline will be stored in the same AZURE repos repository
+
+- Enable continuous integration in  pipeline at the triggers section by specifying the master branch
+- And the commit the chages to master branch and we will see the pipeline starts building
+
+## Override the yaml configuration file from here
+Go to the pipelines
+Select the desired pipeline
+Open the yaml pipeline code and select the more options (three dots) -> Triggers
+Here we have an option of
+- Override the YAML continuous integration trigger from here
+- Select the above option and make the config changes
+
+Note: Triggers tab will always override what is mentioned in yaml file
+
+
+USING TEMPLATES TO BUILD MULTIPLE CONFIGURATIONS
+------------------------------------------------
+# In classic Build pipelines we have a concept of Task group - which will group the tasks
+The same feature is not available in yaml pipelines
+So we have a concept of yaml templates
+
+Create a directory in the Azure Devops code repository
+Create a YAML file
+In this YAML file we will have 
+    - Steps and tasks to be grouped
+    - Parameters - which will be accepted as a inputs - Syntax - ${{paramters.parameter_name}}
+    - variables - are the static ones -> this is the syntax $(variable_name)
+

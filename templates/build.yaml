@@ -1,0 +1,25 @@
+parameters:
+  buildConfiguration: 'Release'
+  projectName: '**/*.csproj'
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: RESTORE in ${{buildConfiguration}} configuration
+  inputs:
+    command: 'restore'
+    projects: ${{projectName}}
+    feedsToUse: 'select'
+
+- task: DotNetCoreCLI@2
+  displayName: BUILD in ${{buildConfiguration}} configuration
+  inputs:
+    command: 'build'
+    projects: ${{projectName}}
+    arguments: '--configuration ${{buildConfiguration}}'
+
+- task: DotNetCoreCLI@2
+  displayName: PUBLISH in ${{buildConfiguration}} configuration
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+    arguments: '--configuration ${{buildConfiguration}} --output $(Build.ArtifactStagingDirectory)/${{buildConfiguration}}'

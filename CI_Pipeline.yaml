@@ -1,0 +1,175 @@
+# First Basic CI Pipeline for building dotnet project in Azure DevOps
+trigger:
+- none
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: RESTORE
+  inputs:
+    command: 'restore'
+    projects: '**/*.csproj'
+    feedsToUse: 'select'
+
+- task: DotNetCoreCLI@2
+  displayName: BUILD
+  inputs:
+    command: 'build'
+    projects: '**/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+displayName: PUBLISH
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: PUBLISHBUILDARTIFACT
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+
+
+# Enable continuous integration in the pipeline
+# First Basic CI Pipeline for building dotnet project in Azure DevOps
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: RESTORE
+  inputs:
+    command: 'restore'
+    projects: '**/*.csproj'
+    feedsToUse: 'select'
+
+- task: DotNetCoreCLI@2
+  displayName: BUILD
+  inputs:
+    command: 'build'
+    projects: '**/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+displayName: PUBLISH
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: PUBLISHBUILDARTIFACT
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+
+
+# Exploring more options
+
+
+
+# You can control which branches get CI triggers with a simple syntax:
+trigger:
+- master
+- releases/*
+
+# A pipeline with no CI trigger
+trigger: none
+
+# specific branch build with batching
+trigger:
+  batch: true     # This is about the brach changes while build is in progress
+  branches:
+  include:
+  - master
+
+# specific branch build
+trigger:
+  branches:
+    include:
+      - master
+      - releases/*
+    exclude:
+      - releases/old*
+  paths:
+    include:
+      - docs/*
+    exclude:
+      - docs/README.md
+
+# In addition to specifying branch names in the branches lists, you can also configure triggers based on tags by
+# using the following format:
+trigger:
+  branches:
+    include:
+      refs/tags/{tagname}
+    exclude:
+      refs/tags/{othertagname}
+
+# You can specify the target branches for your pull request builds.
+# YAML PR triggers are only supported in GitHub and Bitbucket Cloud and for NOT for Azure Repos
+pr:
+  - master
+  - releases/*
+
+# Azure Pipeline using templates as configuration
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+# - task: DotNetCoreCLI@2
+#   displayName: RESTORE
+#   inputs:
+#     command: 'restore'
+#     projects: '**/*.csproj'
+#     feedsToUse: 'select'
+
+# - task: DotNetCoreCLI@2
+#   displayName: BUILD
+#   inputs:
+#     command: 'build'
+#     projects: '**/*.csproj'
+#     arguments: '--configuration $(buildConfiguration)'
+
+# - task: DotNetCoreCLI@2
+# displayName: PUBLISH
+#   inputs:
+#     command: 'publish'
+#     publishWebProjects: true
+#     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+
+- template: templates/build.yaml
+  parameters:
+    buildConfiguration: 'Debug'
+
+- template: templates/build.yaml
+  parameters:
+    buildConfiguration: 'Release'
+
+- task: PublishBuildArtifacts@1
+  displayName: PUBLISHBUILDARTIFACT
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'

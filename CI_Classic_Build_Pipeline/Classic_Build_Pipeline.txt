@@ -64,3 +64,36 @@ Add the task - Publish Artifact: drop
 
 -> Save & Queue
 -> Run the Agent Job
+
+------------------------------------------------
+Enable continuous integration for build pipeline
+------------------------------------------------
+Go to the pipeline
+Triggers -> Enable continuous integration
+Apply Branch filters -> 
+Apply Path filters
+
+- Pipeline can be scheduled
+- Triggers -> Scheduled option
+
+
+** Batch Changes While Build in progress **
+-------------------------------------------
+If we do not select this option then,
+Let us assume that our build takes 15 mins of time to complete
+During this build if there are 3 pushes made to remote repository, then these pushes will be in the queue to run the job
+If we select this option, during our build if there are pushes happening to remote repo then they will not be queued and after completion of the build all the pushes will run in a single build
+
+---------
+Dashboard
+---------
+- Add a dashboard
+- Go to overview -> Dashboards -> Overview -> Edit Add Markdown -> Go to Pipeline and options -> 
+We will get markdown code for status badge
+
+------------------------
+Working with Task Groups
+------------------------
+Unlink the tasks and group them
+We can export and import the task groups
+This helps us to reuse the code
