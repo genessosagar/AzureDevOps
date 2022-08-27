@@ -1,3 +1,21 @@
+Github and Bitbucket - Are used to store the code
+These two use GIT for source code management
+There will be multiple developers who will be working on the code
+In order to keep track of the changes made by developers we use GIT
+
+One of the ways is
+Create a repository in the Github/Bitbucket
+And clone the repository into your local using Https or SSH
+Git will be automatically initialised
+
+Second Method is
+Create a directory in your local
+And initialise git manually - git init
+Create a Repository in github account
+Add remote repository to this initialised GIT
+
+
+
 # Git and Azure Repos
 - Azure Repos support both GIT and TFVC (centralised version control system)
 - Github supports only GIT
